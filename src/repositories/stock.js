@@ -24,7 +24,7 @@ export const getStock = (limit) => {
 
 export const updateStock = (nama_barang, deskripsi, harga,jumlah,barang_id) => {
     let updated_at = new Date();
-    const sql  = "UPDATE stok_barang SET nama_barang = ? , deskripsi = ?, harga = ?, jumlah = ?, updated_at = ? WHERE barang_id = ?";
+    const sql  = "UPDATE stok_barang SET nama_barang = ?, deskripsi = ?, harga = ?, jumlah = ?, updated_at = ? WHERE barang_id = ?";
     const values = [nama_barang, deskripsi, harga, jumlah, updated_at, barang_id];
 
     return db.query(sql, values);

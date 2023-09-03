@@ -37,7 +37,7 @@ export const updateStockData = async (req, res, next) => {
         
         const [result] = await Stock.updateStock(nama_barang, deskripsi, harga, jumlah,barang_id);
 
-        successResponse(res, "data berhasil di update",result[0]);
+        successResponse(res, "data berhasil di update",result[0]); 
     }catch(error){
         next(error);
     }

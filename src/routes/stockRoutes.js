@@ -5,7 +5,7 @@ const stockRoutes =  express.Router();
 
 stockRoutes.get("/", StockServices.getStockData);
 stockRoutes.post("/", StockServices.insertStockData);
-stockRoutes.post("/:id", StockServices.updateStockData);
+stockRoutes.put("/:id", StockServices.updateStockData);
 stockRoutes.delete("/:id", StockServices.deleteStockData);
 
 export default stockRoutes;

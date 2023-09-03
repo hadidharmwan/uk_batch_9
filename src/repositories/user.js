@@ -22,10 +22,10 @@ export const checkEmailUser = (email) => {
     return db.query(sql, values);
 }
 
-export const updateUser = (user_id, name, email, password) => {
+export const updateUser = (name, email, password,user_id) => {
     let updated_at = new Date();
-    const sql  = "UPDATE users SET name =? , email = ?, password = ? , updated_at = ? WHERE user_id = ?";
-    const values = [user_id, name, email, password, updated_at];
+    const sql  = "UPDATE users SET name =? , email = ?, password = ?, updated_at = ? WHERE user_id = ?";
+    const values = [name, email, password, updated_at,user_id];
 
     return db.query(sql, values);
 } 

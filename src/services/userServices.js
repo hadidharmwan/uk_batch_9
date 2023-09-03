@@ -45,7 +45,7 @@ export const updateUserData = async (req, res, next) => {
         let name = req.body.name;
         let email = req.body.email;
         let password = req.body.password;
-        const [result] = await User.updateUser(id, name, email, password);
+        const [result] = await User.updateUser(name, email, password,id);
 
         successResponse(res, "data berhasil di update!", result[0])
     } catch (error) {
