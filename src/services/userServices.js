@@ -2,13 +2,15 @@ import * as User from "../repositories/user.js";
 import {successResponse, errorResponse} from "../utils/response.js";
 
 export const insertUserData = async (req, res, next) => {
-
     try {
         let name = req.body.name;
         let email = req.body.email;
         let password = req.body.password;
+        let saltRound = 10;
 
        let tawa = await User.checkEmailUser(email);
+
+       //validasi
         if (name == "" && email == "" && password == ""){
             errorResponse(res, "nama harus diisi");
         }
@@ -17,8 +19,11 @@ export const insertUserData = async (req, res, next) => {
 
         // }
         else{
-            const [result] = await User.createUser(name, email, password);
-            successResponse(res, "data berhasil ditambahkan", {user_id: result.insertId}, 201);
+            bcrypt.hash(password, saltRound, async(err, hash) => {
+
+                const [result] = await User.createUser(name, email,hash);
+                successResponse(res, "data berhasil ditambahkan", {user_id: result.insertId}, 201);
+            })
         }
         console.log(tawa[email]);
         

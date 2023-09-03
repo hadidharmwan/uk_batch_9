@@ -29,7 +29,7 @@ export const getStockData = async (req, res, next) => {
 
 export const updateStockData = async (req, res, next) => {
     try{
-        let barang_id = req.params.barang_id;
+        let barang_id = req.params.id;
         let nama_barang = req.body.nama_barang;
         let deskripsi = req.body.deskripsi;
         let harga = req.body.harga;
@@ -45,7 +45,7 @@ export const updateStockData = async (req, res, next) => {
 
 export const deleteStockData = async (req, res, next) => {
     try{
-        let barang_id = req.params.barang_id;
+        let barang_id = req.params.id;
         const [result] = await Stock.deleteStock(barang_id);
         successResponse(res, "berhasil hapus data!",result[0]);
     }catch(error){
