@@ -112,14 +112,31 @@ export const authUser = async (req, res, next) => {
 
                     successResponse(res, "success", data);
                 }else {
-                    errorResp(res, "invalid email or password", 401);
+                    errorResponse(res, "invalid email or password", 401);
                 }
             });   
         }else{
-            errorResp(res, "invalid email or password", 401);    
+            errorResponse(res, "invalid email or password", 401);    
         }
     } catch (error) {
         next(error);
     }
 }
 
+export const validateToken =  (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    const accessToken = authHeader && authHeader.split(' ')[1];
+
+    if ( accessToken == null ){
+        errorResponse(res, "invalid req, authorization  not found");
+    }
+    jwt.verify(accessToken, SECRET_ACCESS_TOKEN, (error, claims) => {
+        if (error){
+            errorResponse(res, error.message, 403);
+        }else{
+            req.claims = claims;
+            console.log(claims);
+            next()
+        }
+    })
+}
