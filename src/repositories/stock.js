@@ -15,14 +15,14 @@ export const getStock = (limit) => {
     return db.query(sql, values);
 }
 
-// export const checkEmailUser = (email) => {
-//     const sql = "SELECT user_id, name, email, password, created_at, updated_at FROM users WHERE email = ?";
-//     const values = [email];
+export const getStockByName = (nama_barang) => {
+    const sql = "SELECT  * FROM stok_barang WHERE nama_barang = ?";
+    const values = [nama_barang];
     
-//     return db.query(sql, values);
-// }
+    return db.query(sql, values);
+}
 
-export const updateStock = (nama_barang, deskripsi, harga,jumlah,barang_id) => {
+export const updateDataStock = (nama_barang, deskripsi, harga,jumlah,barang_id) => {
     let updated_at = new Date();
     const sql  = "UPDATE stok_barang SET nama_barang = ?, deskripsi = ?, harga = ?, jumlah = ?, updated_at = ? WHERE barang_id = ?";
     const values = [nama_barang, deskripsi, harga, jumlah, updated_at, barang_id];
@@ -36,4 +36,18 @@ export const deleteStock = (barang_id) => {
     const values = [barang_id];
 
     return db.query(sql, values);
+}
+
+export const kurangiStok = (angka,barang_id) => {
+    const sql = "UPDATE stok_barang SET jumlah = jumlah - ? where barang_id = ?";
+    const values = [angka, barang_id];
+
+    return db.query(sql,values);
+}
+
+export const tambahStok = (angka, barang_id) => {
+    const sql = "UPDATE stok_barang SET jumlah = jumlah + ? where barang_id = ?";
+    const values = [angka, barang_id];
+
+    return db.query(sql,values);
 }

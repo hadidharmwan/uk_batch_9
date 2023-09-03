@@ -37,3 +37,10 @@ export const deleteUser = (user_id) => {
 
     return db.query(sql, values);
 }
+
+export const getById = (user_id) => {
+    const sql = "SELECT * FROM users WHERE user_id = ?";
+    const values = [user_id];
+
+    return db.query(sql, values)
+}

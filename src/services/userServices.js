@@ -37,6 +37,7 @@ export const insertUserData = async (req, res, next) => {
     }
 }
 
+
 export const getAllUserData  = async (req, res, next) => {
     try {
         const [result] = await User.getUser(100);
@@ -73,8 +74,21 @@ export const deleteUserData = async (req, res, next) => {
     }
 }
 
+export const getUserById = async (req, res, next) =>{
+    try {
 
-export const auhtUser = async (req, res, next) => {
+        let user_id = req.params.user_id;
+        const [result] = await User.getById(user_id);
+      
+
+        successResponse(res, "success", result[0])
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export const authUser = async (req, res, next) => {
     try {
         let email = req.body.email;
         let password = req.body.password;
@@ -96,13 +110,13 @@ export const auhtUser = async (req, res, next) => {
                         refresh_token: refreshToken,
                     }
 
-                    successResponse(response, "success", data);
+                    successResponse(res, "success", data);
                 }else {
-                    errorResp(response, "invalid email or password", 401);
+                    errorResp(res, "invalid email or password", 401);
                 }
             });   
         }else{
-            errorResp(response, "invalid email or password", 401);    
+            errorResp(res, "invalid email or password", 401);    
         }
     } catch (error) {
         next(error);

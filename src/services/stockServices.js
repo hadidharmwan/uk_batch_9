@@ -27,6 +27,17 @@ export const getStockData = async (req, res, next) => {
 
 }
 
+export const getStockDataByName = async (req, res, next) => {
+    try {
+        let nama_barang = req.params.nama_barang;
+        const [result] = await Stock.getStockByName(nama_barang);
+        successResponse(res,"data yang ditampilkan", result[0]);
+    } catch (error) {
+        next(error);
+    }
+
+}
+
 export const updateStockData = async (req, res, next) => {
     try{
         let barang_id = req.params.id;
@@ -35,7 +46,7 @@ export const updateStockData = async (req, res, next) => {
         let harga = req.body.harga;
         let jumlah = req.body.jumlah;
         
-        const [result] = await Stock.updateStock(nama_barang, deskripsi, harga, jumlah,barang_id);
+        const [result] = await Stock.updateDataStock(nama_barang, deskripsi, harga, jumlah,barang_id);
 
         successResponse(res, "data berhasil di update",result[0]); 
     }catch(error){
@@ -49,6 +60,32 @@ export const deleteStockData = async (req, res, next) => {
         const [result] = await Stock.deleteStock(barang_id);
         successResponse(res, "berhasil hapus data!",result[0]);
     }catch(error){
+        next(error);
+    }
+}
+
+export const kurangStokBarang = async (req, res, next) => {
+    try {
+        let barang_id = req.body.barang_id;
+        let angka = req.body.angka;
+        const [result] = await Stock.kurangiStok(angka, barang_id);
+
+        successResponse(res, "jumlah stok berhasil dikurangi",result[0]);
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const tambahStokBarang = async (req, res, next) => {
+    try {
+        let barang_id = req.body.barang_id;
+        let angka = req.body.angka;
+        const [result] = await Stock.tambahStok(angka, barang_id);
+        console.log(barang_id);
+
+        successResponse(res, "jumlah stok berhasil ditambah",result[0]);
+    } catch (error) {
         next(error);
     }
 }

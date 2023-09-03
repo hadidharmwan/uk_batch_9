@@ -7,7 +7,7 @@ userRoutes.get("/", User.getAllUserData);
 userRoutes.post("/", User.insertUserData);
 userRoutes.put("/:id", User.updateUserData);
 userRoutes.delete("/:id", User.deleteUserData);
-userRoutes.get("/email", User.checkEmail);
+userRoutes.get("/:user_id", User.getUserById);
 
 
 export default userRoutes;
