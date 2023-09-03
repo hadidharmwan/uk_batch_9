@@ -31,9 +31,9 @@ export const updateDataStock = (nama_barang, deskripsi, harga,jumlah,barang_id) 
 } 
 
 
-export const deleteStock = (barang_id) => {
-    const sql = "DELETE FROM users WHERE barang_id = ?";
-    const values = [barang_id];
+export const deleteStock = (id) => {
+    const sql = "DELETE FROM stok_barang WHERE barang_id = ?";
+    const values = [id];
 
     return db.query(sql, values);
 }

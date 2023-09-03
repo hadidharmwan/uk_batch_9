@@ -18,7 +18,7 @@ export const insertUserData = async (req, res, next) => {
         
        //validasi
         if (name == "" && email == "" && password == ""){
-            errorResponse(res, "nama harus diisi");
+            successResponse(res, "harus diisi");
         }
         else if (result.length > 0){
             const user = result[0];

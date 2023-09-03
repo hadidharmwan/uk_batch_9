@@ -1,17 +1,17 @@
 import express from "express";
 import * as StockServices from "../services/stockServices.js";
-import * as User from "../services/userServices.js";
+import { validateToken } from "../services/userServices.js";
 
 
 const stockRoutes =  express.Router();
 
-stockRoutes.get("/", User.validateToken, StockServices.getStockData);
-stockRoutes.post("/",User.validateToken, StockServices.insertStockData);
-stockRoutes.put("/:id", StockServices.updateStockData);
-stockRoutes.delete("/:id", StockServices.deleteStockData);
-stockRoutes.put("/kurang/total_stok", StockServices.kurangStokBarang); 
-stockRoutes.put("/tambah/total_stok", StockServices.tambahStokBarang); 
-stockRoutes.get("/:nama_barang", StockServices.getStockDataByName);
+stockRoutes.get("/", validateToken, StockServices.getStockData);
+stockRoutes.post("/",validateToken, StockServices.insertStockData);
+stockRoutes.put("/:id",validateToken, StockServices.updateStockData);
+stockRoutes.delete("/:id",validateToken, StockServices.deleteStockData);
+stockRoutes.put("/kurang/total_stok",validateToken, StockServices.kurangStokBarang); 
+stockRoutes.put("/tambah/total_stok",validateToken, StockServices.tambahStokBarang); 
+stockRoutes.get("/:nama_barang",validateToken, StockServices.getStockDataByName);
 
 
 
